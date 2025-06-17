@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Diorama Gallery - AMNH Demo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      font-family: sans-serif;
+      color: white;
+    }
+
+    #header {
+      text-align: center;
+      padding: 40px;
+      background-color: #111;
+      font-size: 1.8em;
+    }
+
+    #viewer-container {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+    }
+
+    #viewer {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    #fullscreen-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 10px 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #fff;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #description {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 50px;
+      font-size: 1em;
+      line-height: 1.5;
+      text-align: center;
+      color: #ddd;
+    }
+
+    #grid-viewers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 2000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .sub-viewer {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      background: #222;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">AMNH Digital Diorama Gallery</div>
+
+  <div id="viewer-container">
+    <iframe 
+      id="viewer"
+      src="https://splatter.app/s/eug-c10"
+      title="African Lions"
+      allowfullscreen
+    ></iframe>
+    <button id="fullscreen-btn" onclick="toggleFullscreen()">🔳 Fullscreen</button>
+  </div>
+
+  <div id="description">
+    This is a draft description for a digital diorama viewer showcasing a Gaussian Splatting scene. Here, the viewer can explore photogrammetric 3D reconstructions interactively, offering a glimpse into immersive web-native 3D content.
+  </div>
+
+
+  <div id="grid-viewers">
+    <iframe class="sub-viewer" src="https://lumalabs.ai/embed/8f88e684-89e6-4175-b3b2-f2d29d346c9c?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" frameborder="0" style="border: none;"></iframe>
+    <iframe class="sub-viewer" src="https://lumalabs.ai/embed/9c4546c3-98c7-470f-a756-5c75b355a2a5?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" frameborder="0" style="border: none;"></iframe>
+    <iframe class="sub-viewer" src="https://lumalabs.ai/embed/8f8ba9d0-36c4-43af-abf6-0a20e5180a11?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" frameborder="0" title="luma embed" style="border: none;"></iframe>
+    <iframe class="sub-viewer" src="https://splatter.app/s/dqv-g06" title="Alaska Brown Bear"></iframe>
+    <iframe class="sub-viewer" src="https://splatter.app/s/dei-6t1" title="Cougar (Mountain Lion)"></iframe>
+    <iframe class="sub-viewer" src="https://splatter.app/s/wcl-ldc" title="Dall Sheep"></iframe>
+    <iframe class="sub-viewer" src="https://splatter.app/s/ldp-ghz" title="Bighorn Sheep"></iframe>
+    <iframe class="sub-viewer" src="https://splatter.app/s/n3p-3da" title="Polar Bear"></iframe>
+    <iframe class="sub-viewer" src="https://splatter.app/s/cpw-qpz" title="Spotted Skunk and Ringtail (Cacomistle)"></iframe>
+    <br><br><br>
+  </div>
+
+  <script>
+    function toggleFullscreen() {
+      const iframe = document.getElementById('viewer');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
