@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Diorama Gallery - AMNH Demo</title>
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       height: 100%;
@@ -15,10 +17,23 @@
     }
 
     #header {
-      text-align: center;
-      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 60px 20px;
       background-color: #111;
-      font-size: 1.8em;
+      font-size: 2.4em;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: none;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      flex-wrap: wrap;
+    }
+
+    #header-logo {
+      height: 60px;
+      color: white;
     }
 
     #viewer-container {
@@ -64,44 +79,253 @@
       padding: 0 20px;
     }
 
+    .sub-viewer-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .sub-fullscreen-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 6px 12px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #fff;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    .sub-title {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: left;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sub-title:hover {
+      color: #9c9aff;
+    }
+
+    .sub-description {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: #ccc;
+      font-size: 0.9em;
+      text-align: left;
+      max-width: 90%;
+      line-height: 1.4;
+    }
+
     .sub-viewer {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: none;
       background: #222;
     }
+
+    #no-results {
+      display: none;
+      text-align: center;
+      color: #999;
+      font-size: 1em;
+      margin: 40px 0;
+    }
   </style>
 </head>
+
 <body>
-  <div id="header">AMNH Digital Diorama Gallery</div>
+  <div id="header">
+    <span id="header-title">AMNH Digital Diorama Gallery</span>
+  </div>
 
   <div id="viewer-container">
-    <iframe 
-      id="viewer"
-      src="https://splatter.app/s/eug-c10"
-      title="African Lions"
-      allowfullscreen
-    ></iframe>
+    <iframe id="viewer" src="https://splatter.app/s/eug-c10" title="African Lions" allowfullscreen></iframe>
     <button id="fullscreen-btn" onclick="toggleFullscreen()">🔳 Fullscreen</button>
   </div>
 
   <div id="description">
-    This is a draft description for a digital diorama viewer showcasing a Gaussian Splatting scene. Here, the viewer can explore photogrammetric 3D reconstructions interactively, offering a glimpse into immersive web-native 3D content.
+    This is a draft description for a digital diorama viewer showcasing a Gaussian Splatting scene. Here, the viewer can
+    explore photogrammetric 3D reconstructions interactively, offering a glimpse into immersive web-native 3D content.
   </div>
 
+  <div style="text-align: center; margin: 20px;">
+    <input type="text" id="search-bar" placeholder="Search dioramas by title (e.g., 'sheep')"
+      style="padding: 10px 20px; font-size: 1em; width: 60%; max-width: 500px; border-radius: 5px; border: none;"
+      oninput="filterViewers()" />
+  </div>
 
   <div id="grid-viewers">
-    <iframe class="sub-viewer" src="https://lumalabs.ai/embed/8f88e684-89e6-4175-b3b2-f2d29d346c9c?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" frameborder="0" style="border: none;"></iframe>
-    <iframe class="sub-viewer" src="https://lumalabs.ai/embed/9c4546c3-98c7-470f-a756-5c75b355a2a5?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" frameborder="0" style="border: none;"></iframe>
-    <iframe class="sub-viewer" src="https://lumalabs.ai/embed/8f8ba9d0-36c4-43af-abf6-0a20e5180a11?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" frameborder="0" title="luma embed" style="border: none;"></iframe>
-    <iframe class="sub-viewer" src="https://splatter.app/s/dqv-g06" title="Alaska Brown Bear"></iframe>
-    <iframe class="sub-viewer" src="https://splatter.app/s/dei-6t1" title="Cougar (Mountain Lion)"></iframe>
-    <iframe class="sub-viewer" src="https://splatter.app/s/wcl-ldc" title="Dall Sheep"></iframe>
-    <iframe class="sub-viewer" src="https://splatter.app/s/ldp-ghz" title="Bighorn Sheep"></iframe>
-    <iframe class="sub-viewer" src="https://splatter.app/s/n3p-3da" title="Polar Bear"></iframe>
-    <iframe class="sub-viewer" src="https://splatter.app/s/cpw-qpz" title="Spotted Skunk and Ringtail (Cacomistle)"></iframe>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer"
+          src="https://lumalabs.ai/embed/8f88e684-89e6-4175-b3b2-f2d29d346c9c?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="South Africa Deer" style="border: none;"></iframe>
+      </div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer"
+          src="https://lumalabs.ai/embed/9c4546c3-98c7-470f-a756-5c75b355a2a5?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="Cougar Mountain Lion Panther" style="border: none;"></iframe>
+      </div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer"
+          src="https://lumalabs.ai/embed/8f8ba9d0-36c4-43af-abf6-0a20e5180a11?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="luma embed" style="border: none;"></iframe>
+      </div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/dqv-g06" title="Alaska Brown Bear"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/alaska-brown-bear" class="sub-title"
+          target="_blank" rel="noopener noreferrer">Alaska Brown Bear</a></div>
+      <div class="sub-description">The Alaska brown bear, also known as the grizzly bear, is a subspecies of the brown
+        bear found in Alaska. It is one of the largest bears in the world.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/dei-6t1" title="Cougar (Mountain Lion)"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/cougar-mountain-lion"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Cougar (Mountain Lion)</a></div>
+      <div class="sub-description">The cougar, also known as the mountain lion, is a large felid of the subfamily
+        Felinae native to the Americas.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/wcl-ldc" title="Dall Sheep"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/dall-sheep"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Dall Sheep</a></div>
+
+      <div class="sub-description">A pair of Dall Sheep stand on a rocky ledge in the Alaskan wilderness.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/ldp-ghz" title="Bighorn Sheep"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/bighorn-sheep"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Bighorn Sheep</a></div>
+      <div class="sub-description">The bighorn sheep is a species of sheep native to North America. It is named for its
+        large horns.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/n3p-3da" title="Polar Bear"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title">Polar Bear</div>
+      <div class="sub-description">A polar bear stands on an ice floe in the Arctic Ocean.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/cpw-qpz"
+          title="Spotted Skunk and Ringtail (Cacomistle)"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/spotted-skunk-and-ringtail-cacomistle"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Spotted Skunk and Ringtail (Cacomistle)</a></div>
+      <div class="sub-description">The spotted skunk is a small, nocturnal carnivore found in North America. The
+        ringtail, also known as the cacomistle, is a small mammal related to the raccoon.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/aeg-shu" title="Black Bear"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/black-bear"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Black Bear</a></div>
+      <div class="sub-description">The black bear is a medium-sized bear species found in North America. It is known for
+        its black fur and adaptability to various habitats.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/ghf-ybx"
+          title="Ice Age Animals, Alaska, Stag Moose, Steppe Bison, Woolly Mammoth, Yak, Saiga, American Mastodon, Extinct"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/extinct-american-mammals-of-the-ice-age/ice-age-animals-alaska"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Ice Age Animals, Alaska</a></div>
+      <div class="sub-description">The Ice Age animals of Alaska include the Stag Moose, Steppe Bison, Woolly Mammoth,
+        Yak, Saiga, American Mastodon, and other extinct species.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/1b3-sbl" title="Grizzly Bear"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/grizzly-bear"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Grizzly Bear</a></div>
+      <div class="sub-description">The grizzly bear is a large bear species found in North America. It is known for its
+        distinctive hump on its shoulders and its powerful build.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/2ga-ila" title="American Bison and Pronghorn, antelope"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/american-bison-and-pronghorn"
+          class="sub-title" target="_blank" rel="noopener noreferrer">American Bison and Pronghorn</a></div>
+      <div class="sub-description">The American bison is a large mammal native to North America, known for its massive size and distinctive hump. Pronghorns are fast-running herbivores found in the grasslands of North America.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/v6n-725" title="Sloth Bear"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title">Sloth Bear</div>
+      <div class="sub-description">The sloth bear is a medium-sized bear species found in the Indian subcontinent. It is known for its shaggy black fur and a diet that primarily consists of insects.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/vf5-xo7" title="Peking in the Late 15th Century, China, Culture, Asia, Asian, Beijing, Trade"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a
+          href="https://archaeology.columbia.edu/magnifying-the-miniatures/beijing/"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Peking in the Late 15th Century</a></div>
+      <div class="sub-description">In the late 15th century, Peking (Beijing) was the capital of Ming China, centered around the Forbidden City and Imperial City. Once unimportant, it rose to prominence under Mongol rule and became a hub of government and East Asian trade, connecting inland and maritime routes.</div>
+    </div>
     <br><br><br>
   </div>
+
+  <div id="no-results">No results found.</div>
+
+  <footer style="text-align: center; padding: 60px 20px 80px; color: #777; font-size: 0.9em;">
+    © 2025 Eozin Che. This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/"
+      target="_blank" style="color: #aaa; text-decoration: underline;">Creative Commons Attribution 4.0 International
+      License</a>.
+  </footer>
+
 
   <script>
     function toggleFullscreen() {
@@ -114,6 +338,37 @@
         iframe.msRequestFullscreen();
       }
     }
+
+    function toggleSubFullscreen(button) {
+      const iframe = button.parentElement.querySelector('iframe');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+
+    function filterViewers() {
+      const input = document.getElementById('search-bar').value.toLowerCase();
+      const containers = document.querySelectorAll('.sub-viewer-container');
+      let visibleCount = 0;
+
+      containers.forEach(container => {
+        const iframe = container.querySelector('iframe');
+        const title = iframe.getAttribute('title') || '';
+        if (title.toLowerCase().includes(input)) {
+          container.style.display = '';
+          visibleCount++;
+        } else {
+          container.style.display = 'none';
+        }
+      });
+
+      document.getElementById('no-results').style.display = visibleCount === 0 ? 'block' : 'none';
+    }
   </script>
 </body>
+
 </html>
