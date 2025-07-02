@@ -297,13 +297,30 @@
     </div>
     <div class="sub-viewer-container">
       <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/fhk-5iv" title="Alaskan Moose"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/alaskan-moose"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Alaskan Moose</a></div>
+      <div class="sub-description">Two Alaskan moose engage in combat, locking antlers in a dramatic display of strength and dominance during the autumn rut.</div>
+    </div>
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
         <iframe class="sub-viewer" src="https://splatter.app/s/n3p-3da" title="Polar Bear"></iframe>
         <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
       </div>
       <div class="sub-title">Polar Bear</div>
       <div class="sub-description">A polar bear stands on an ice floe in the Arctic Ocean.</div>
     </div>
-
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://splatter.app/s/2ga-ila" title="American Bison and Pronghorn, antelope"></iframe>
+        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
+      </div>
+      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/american-bison-and-pronghorn"
+          class="sub-title" target="_blank" rel="noopener noreferrer">American Bison and Pronghorn</a></div>
+      <div class="sub-description">The American bison is a large mammal native to North America, known for its massive size and distinctive hump. Pronghorns are fast-running herbivores found in the grasslands of North America.</div>
+    </div>
     <div class="sub-viewer-container">
       <div class="iframe-wrapper">
         <iframe class="sub-viewer" src="https://splatter.app/s/cpw-qpz"
@@ -348,15 +365,7 @@
       <div class="sub-description">The grizzly bear is a large bear species found in North America. It is known for its
         distinctive hump on its shoulders and its powerful build.</div>
     </div>
-    <div class="sub-viewer-container">
-      <div class="iframe-wrapper">
-        <iframe class="sub-viewer" src="https://splatter.app/s/2ga-ila" title="American Bison and Pronghorn, antelope"></iframe>
-        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
-      </div>
-      <div class="sub-title"><a href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/american-bison-and-pronghorn"
-          class="sub-title" target="_blank" rel="noopener noreferrer">American Bison and Pronghorn</a></div>
-      <div class="sub-description">The American bison is a large mammal native to North America, known for its massive size and distinctive hump. Pronghorns are fast-running herbivores found in the grasslands of North America.</div>
-    </div>
+    
     <div class="sub-viewer-container">
       <div class="iframe-wrapper">
         <iframe class="sub-viewer" src="https://splatter.app/s/v6n-725" title="Sloth Bear"></iframe>
@@ -365,6 +374,7 @@
       <div class="sub-title">Sloth Bear</div>
       <div class="sub-description">The sloth bear is a medium-sized bear species found in the Indian subcontinent. It is known for its shaggy black fur and a diet that primarily consists of insects.</div>
     </div>
+    
     
     <br><br><br>
   </div>
@@ -419,7 +429,7 @@
         }
       });
 
-      document.getElementById('no-results').style.display = visibleCount === 0 ? 'block' : 'none';
+      document.getElementById('no-results').style.display = visibleCount === 0 ? 'block': 'none';
     }
   </script>
 </body>
