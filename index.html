@@ -5,14 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Diorama Gallery - AMNH Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    html,
+    html {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      color: #fff;
+      line-height: 1.6;
+      background-color: #000;
+    }
+
     body {
       margin: 0;
       padding: 0;
       height: 100%;
       background-color: #000;
-      font-family: sans-serif;
+      font-family: 'Inter', sans-serif;
       color: white;
     }
 
@@ -34,6 +41,13 @@
     #header-logo {
       height: 60px;
       color: white;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0rem;
+      letter-spacing: -0.02em;
     }
 
     #viewer-container {
@@ -147,7 +161,7 @@
 
 <body>
   <div id="header">
-    <span id="header-title">AMNH Digital Diorama Gallery</span>
+    <span id="header-title"><h1>AMNH Digital Diorama Gallery</h1></span>
   </div>
 
   <div id="viewer-container">
@@ -164,29 +178,76 @@
       style="padding: 10px 20px; font-size: 1em; width: 60%; max-width: 500px; border-radius: 5px; border: none;"
       oninput="filterViewers()" />
   </div>
-
-  <div id="grid-viewers">
+  
+<div id="grid-viewers">
     <div class="sub-viewer-container">
       <div class="iframe-wrapper">
         <iframe class="sub-viewer"
-          src="https://lumalabs.ai/embed/8f88e684-89e6-4175-b3b2-f2d29d346c9c?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
-          frameborder="0" title="South Africa Deer" style="border: none;"></iframe>
+          src="https://lumalabs.ai/embed/2e3bd98b-a4c7-410f-ad13-0c60d53a0439?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="Theodore Roosevelt Rotunda, Barosaurus, Allosaurus" style="border: none;"></iframe>
       </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/theodore-roosevelt-memorial/roosevelt-rotunda" class="sub-title"
+          target="_blank" rel="noopener noreferrer">Theodore Roosevelt Rotunda</a></div>
+      <div class="sub-description">A towering Barosaurus rears up to protect its young from an attacking Allosaurus in a dramatic display—the world’s tallest freestanding dinosaur mount.</div>
     </div>
 
     <div class="sub-viewer-container">
       <div class="iframe-wrapper">
         <iframe class="sub-viewer"
-          src="https://lumalabs.ai/embed/9c4546c3-98c7-470f-a756-5c75b355a2a5?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
-          frameborder="0" title="Cougar Mountain Lion Panther" style="border: none;"></iframe>
+          src="https://lumalabs.ai/embed/a681a99b-bd1f-43d5-8929-e285a0da59c2?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="Early October In Southern New Hampshire, North American Forest" style="border: none;"></iframe>
       </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/north-american-forests" class="sub-title" 
+          target="_blank" rel="noopener noreferrer">Early October In Southern New Hampshire</a></div>
+      <div class="sub-description">Habitat diorama in the Hall of North American Forests</div>
     </div>
+
     <div class="sub-viewer-container">
       <div class="iframe-wrapper">
         <iframe class="sub-viewer"
           src="https://lumalabs.ai/embed/8f8ba9d0-36c4-43af-abf6-0a20e5180a11?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
-          frameborder="0" title="luma embed" style="border: none;"></iframe>
+          frameborder="0" title="Water Hole, Africa, Mammals, Kenya, Giraffe, Zebra, Oryx, Gazelle, Olive Baboon, Elephant" style="border: none;"></iframe>
       </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/african-mammals/water-hole" class="sub-title"
+          target="_blank" rel="noopener noreferrer">Water Hole</a></div>
+      <div class="sub-description">The Water Hole diorama teems with wildlife in search of water in the Guaso Nyiro River Valley in Kenya.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer"
+          src="https://lumalabs.ai/embed/f550d2eb-b527-4ba3-9ce2-e4b093fe22a4?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="Harbor Seal, Sea, Ocean" style="border: none;"></iframe>
+      </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/ocean-life" class="sub-title"
+          target="_blank" rel="noopener noreferrer">Harbor Seal</a></div>
+      <div class="sub-description">These seals are resting on the rocky shore. A harbor seal can be solitary, but sometimes joins groups along the shoreline.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer"
+          src="https://lumalabs.ai/embed/6b549be3-ca40-4086-a202-cf7aba16ba29?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+          frameborder="0" title="Wapiti, Aspen North American, Elk, Colorado" style="border: none;"></iframe>
+      </div>
+      <div class="sub-title"><a
+          href="https://www.amnh.org/exhibitions/permanent/north-american-mammals/wapiti" class="sub-title"
+          target="_blank" rel="noopener noreferrer">Wapiti</a></div>
+      <div class="sub-description">As the October sun sets along Colorado’s White River, wapiti (or elk) graze on aspen and chokecherry. These large deer shape ecosystems, especially where predators like wolves help keep them in check.</div>
+    </div>
+
+    <div class="sub-viewer-container">
+      <div class="iframe-wrapper">
+        <iframe class="sub-viewer" src="https://lumalabs.ai/embed/4a765756-110e-493f-99f2-914319dbf375?mode=sparkles&background=%23ffffff&color=%23000000&showTitle=false&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" title="Peking in the Late 15th Century, China, Culture, Asia, Asian, Beijing, Trade"></iframe>
+      </div>
+      <div class="sub-title"><a
+          href="https://archaeology.columbia.edu/magnifying-the-miniatures/beijing/"
+          class="sub-title" target="_blank" rel="noopener noreferrer">Peking in the Late 15th Century</a></div>
+      <div class="sub-description">In the late 15th century, Peking (Beijing) was the capital of Ming China, centered around the Forbidden City and Imperial City. Once unimportant, it rose to prominence under Mongol rule and became a hub of government and East Asian trade, connecting inland and maritime routes.</div>
     </div>
 
     <div class="sub-viewer-container">
@@ -304,20 +365,13 @@
       <div class="sub-title">Sloth Bear</div>
       <div class="sub-description">The sloth bear is a medium-sized bear species found in the Indian subcontinent. It is known for its shaggy black fur and a diet that primarily consists of insects.</div>
     </div>
-    <div class="sub-viewer-container">
-      <div class="iframe-wrapper">
-        <iframe class="sub-viewer" src="https://splatter.app/s/vf5-xo7" title="Peking in the Late 15th Century, China, Culture, Asia, Asian, Beijing, Trade"></iframe>
-        <button class="sub-fullscreen-btn" onclick="toggleSubFullscreen(this)">🔳 Fullscreen</button>
-      </div>
-      <div class="sub-title"><a
-          href="https://archaeology.columbia.edu/magnifying-the-miniatures/beijing/"
-          class="sub-title" target="_blank" rel="noopener noreferrer">Peking in the Late 15th Century</a></div>
-      <div class="sub-description">In the late 15th century, Peking (Beijing) was the capital of Ming China, centered around the Forbidden City and Imperial City. Once unimportant, it rose to prominence under Mongol rule and became a hub of government and East Asian trade, connecting inland and maritime routes.</div>
-    </div>
+    
     <br><br><br>
   </div>
 
   <div id="no-results">No results found.</div>
+
+<br><br>
 
   <footer style="text-align: center; padding: 60px 20px 80px; color: #777; font-size: 0.9em;">
     © 2025 Eozin Che. This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/"
